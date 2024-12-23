@@ -2,7 +2,7 @@ name: Maven CI Workflow
 
 on:
   push:
-  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,6 +23,10 @@ jobs:
       # Build the project with Maven
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
+
+      # List files in target directory to debug
+      - name: List files in target directory
+        run: ls -l $GITHUB_WORKSPACE/target
 
       # Run the Java application using the shaded JAR
       - name: Run Java application
