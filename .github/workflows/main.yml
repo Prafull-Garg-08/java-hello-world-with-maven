@@ -28,7 +28,7 @@ jobs:
       - name: Run Java application
         run: |
           if [ -f target/jb-hello-world-maven-0.1.0.jar ]; then
-            java -cp target/jb-hello-world-maven-0.1.0.jar hello.HelloWorld
+            java -cp target/jb-hello-world-maven-0.2.0-shaded.jar hello.HelloWorld
           else
             echo "JAR file not found!"
             exit 1
