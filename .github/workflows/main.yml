@@ -20,17 +20,19 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # # Restore Maven cache
-      # - name:  Maven cache
-      #   id:  mvn-cache
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: ~/.m2/repository
-      #     key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-maven-
+      # Restore Maven cache
+      - name:  Maven cache
+        id:  mvn-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+            ${{ runner.os }}-maven-
 
       - name: install dependencies
+        if: steps.mvn-cache.outputs.cache-hit != 'true'
         run: mvn clean install
 
       # Build the project with Maven
