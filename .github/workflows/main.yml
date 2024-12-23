@@ -18,7 +18,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          # cache: maven
+          cache: maven
 
       # Build the project with Maven
       - name: Build with Maven
