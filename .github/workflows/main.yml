@@ -27,7 +27,13 @@ jobs:
       # List files in target directory to debug
       - name: List files in target directory
         run: ls -l $GITHUB_WORKSPACE/target
-
+      
+      - name: Cache Primes
+        id: cache-maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-deps
       
       # Run the Java application using the JAR file (if shaded JAR not found)
       - name: Run Java application
