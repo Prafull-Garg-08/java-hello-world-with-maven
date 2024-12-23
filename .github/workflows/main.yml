@@ -19,24 +19,30 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          # cache: maven
+
+      # # Restore Maven cache
+      # - name:  Maven cache
+      #   id:  mvn-cache
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: ~/.m2/repository
+      #     key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-maven-
+
+      - name: install dependencies
+        run: mvn clean install
 
       # Build the project with Maven
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots verify
+        run: mvn package
 
+     
       # List files in target directory to debug
       - name: List files in target directory
         run: ls -l $GITHUB_WORKSPACE/target
-      
-      - name: Cache Maven
-        id: cache-maven
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-deps
-      
-      # Run the Java application using the JAR file (if shaded JAR not found)
+
+      # Run the Java application using the JAR file
       - name: Run Java application
         run: |
           JAR_PATH="$GITHUB_WORKSPACE/target/jb-hello-world-maven-0.2.0.jar"
