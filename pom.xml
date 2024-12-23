@@ -74,12 +74,7 @@
             <version>2.4.3</version>
         </dependency>
 
-        <!-- Spring Cloud (distributed systems framework) -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter</artifactId>
-            <version>2020.0.3</version>
-        </dependency>
+       
 
         <!-- Jackson (JSON processing) -->
         <dependency>
