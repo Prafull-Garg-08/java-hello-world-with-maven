@@ -24,12 +24,13 @@ jobs:
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
 
-      # Run the Java application to check if it's working
+      # Run the Java application using the shaded JAR
       - name: Run Java application
         run: |
-          if [ -f $GITHUB_WORKSPACE/target/jb-hello-world-maven-0.2.0-shaded.jar ]; then
-            java -cp $GITHUB_WORKSPACE/target/jb-hello-world-maven-0.2.0-shaded.jar hello.HelloWorld
+          JAR_PATH="$GITHUB_WORKSPACE/target/jb-hello-world-maven-0.2.0-shaded.jar"
+          if [ -f "$JAR_PATH" ]; then
+            java -cp "$JAR_PATH" hello.HelloWorld
           else
-            echo "JAR file not found!"
+            echo "Shaded JAR file not found at $JAR_PATH"
             exit 1
           fi
