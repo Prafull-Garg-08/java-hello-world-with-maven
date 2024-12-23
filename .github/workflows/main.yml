@@ -27,7 +27,7 @@ jobs:
       # Run the Java application to check if it's working
       - name: Run Java application
         run: |
-          if [ -f target/jb-hello-world-maven-0.1.0.jar ]; then
+          if [ -f target/jb-hello-world-maven-0.2.0-shaded.jar ]; then
             java -cp target/jb-hello-world-maven-0.2.0-shaded.jar hello.HelloWorld
           else
             echo "JAR file not found!"
