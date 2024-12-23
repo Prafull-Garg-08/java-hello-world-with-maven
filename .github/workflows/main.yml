@@ -28,13 +28,14 @@ jobs:
       - name: List files in target directory
         run: ls -l $GITHUB_WORKSPACE/target
 
-      # Run the Java application using the shaded JAR
+      
+      # Run the Java application using the JAR file (if shaded JAR not found)
       - name: Run Java application
         run: |
-          JAR_PATH="$GITHUB_WORKSPACE/target/jb-hello-world-maven-0.2.0-shaded.jar"
+          JAR_PATH="$GITHUB_WORKSPACE/target/jb-hello-world-maven-0.2.0.jar"
           if [ -f "$JAR_PATH" ]; then
             java -cp "$JAR_PATH" hello.HelloWorld
           else
-            echo "Shaded JAR file not found at $JAR_PATH"
+            echo "JAR file not found at $JAR_PATH"
             exit 1
           fi
